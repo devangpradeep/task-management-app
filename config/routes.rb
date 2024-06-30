@@ -25,6 +25,8 @@ Rails.application.routes.draw do
           get "users"
         end
       end
+
+      resources :categories, only: %i[index show create update]
     end
   end
 end
