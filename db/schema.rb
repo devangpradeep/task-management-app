@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_630_065_018) do # rubocop:disable Metrics/BlockLength
+ActiveRecord::Schema[7.1].define(version: 20_240_709_161_927) do # rubocop:disable Metrics/BlockLength
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +19,22 @@ ActiveRecord::Schema[7.1].define(version: 20_240_630_065_018) do # rubocop:disab
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "status"
+    t.integer "priority"
+    t.bigint "category_id", null: false
+    t.date "deadline"
+    t.bigint "creator_id", null: false
+    t.bigint "assigned_to_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assigned_to_id"], name: "index_tasks_on_assigned_to_id"
+    t.index ["category_id"], name: "index_tasks_on_category_id"
+    t.index ["creator_id"], name: "index_tasks_on_creator_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -32,7 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_630_065_018) do # rubocop:disab
     t.index ["created_by_id"], name: "index_teams_on_created_by_id"
   end
 
-  create_table "teams_users", id: false, force: :cascade do |t|
+  create_table "teams_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "team_id", null: false
     t.datetime "created_at", null: false
@@ -49,5 +63,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_630_065_018) do # rubocop:disab
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "tasks", "categories"
+  add_foreign_key "tasks", "teams_users", column: "assigned_to_id"
+  add_foreign_key "tasks", "teams_users", column: "creator_id"
   add_foreign_key "teams", "users", column: "created_by_id"
 end

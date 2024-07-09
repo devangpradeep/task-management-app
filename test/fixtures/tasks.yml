@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  status: 1
+  priority: 
+  category: one
+  deadline: 2024-06-30 13:29:00
+  teams_user: one
+  assigned_to: one
+
+two:
+  title: MyString
+  description: MyString
+  status: 1
+  priority: 
+  category: two
+  deadline: 2024-06-30 13:29:00
+  teams_user: two
+  assigned_to: two
