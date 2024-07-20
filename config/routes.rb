@@ -27,6 +27,8 @@ Rails.application.routes.draw do
       end
 
       resources :categories, only: %i[index show create update]
+
+      resources :tasks, only: %i[index show create update]
     end
   end
 end
