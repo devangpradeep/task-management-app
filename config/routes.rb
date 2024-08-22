@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       resources :categories, only: %i[index show create update]
 
       resources :tasks, only: %i[index show create update]
+
+      resources :comments, only: %i[index show create update]
     end
   end
 end

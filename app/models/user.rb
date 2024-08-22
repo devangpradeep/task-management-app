@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   has_many :created_teams, class_name: "Team", foreign_key: "created_by_id"
   has_and_belongs_to_many :teams
+  has_many :comments
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
